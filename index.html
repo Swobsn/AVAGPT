@@ -5,135 +5,242 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AVAGPT | Dein Schulungscoach</title>
   <style>
-    html, body { overflow: hidden; margin: 0; padding: 0; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; }
-    body { background: #ffffff; color: #003366; display: flex; flex-direction: column; min-height: 100vh; }
-    header { background: #00549f; color: white; padding: 20px; text-align: center; position: relative; }
-    header h1 { margin: 0; font-size: 2.5rem; animation: pulse 1.5s infinite; }
-    header p { margin: 5px 0 0; font-size: 1rem; }
-    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-    .container { flex: 1; width: 90%; max-width: 700px; margin: 40px auto; background: #f2f2f2; padding: 30px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1); border-top: 8px solid #00549f; position: relative; }
-    .question { background: #e6e6e6; padding: 20px; border-radius: 5px; margin-bottom: 20px; min-height: 100px; }
-    .chat-bubble { padding: 15px; margin: 10px 0; border-radius: 10px; max-width: 70%; opacity: 0; transition: opacity 0.3s ease; word-break: break-word; }
-    .chat-left { background: #dde6f2; color: #002147; text-align: left; border-left: 4px solid #00549f; align-self: flex-start; }
-    .chat-right { background: #d0f0c0; color: #003300; text-align: right; border-right: 4px solid #009933; align-self: flex-end; margin-left: auto; }
-    .chat-container { display: flex; flex-direction: column; align-items: flex-start; }
-    .label { font-weight: bold; margin-bottom: 8px; color: #00549f; text-align: left; }
-    button { margin-top: 15px; background: #00549f; color: white; border: none; padding: 12px 24px; border-radius: 5px; cursor: pointer; font-size: 16px; }
-    button:hover { background: #003366; }
-    footer { background: #f2f2f2; color: #777; text-align: center; padding: 10px; font-size: 0.9rem; }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-    @keyframes smoke { 0% { opacity: 0.2; transform: translateY(0) scale(1); } 50% { opacity: 0.6; transform: translateY(-10px) scale(1.1); } 100% { opacity: 0; transform: translateY(-20px) scale(1.2); } }
-    .coffee-smoke { position: absolute; width: 20px; height: 40px; background: radial-gradient(ellipse at center, rgba(200,200,200,0.4) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; animation: smoke 3s infinite ease-in-out; left: 50%; top: 0; transform: translateX(-50%); }
-    @keyframes thunderFlash { 0%, 100% { background-color: transparent; } 50% { background-color: rgba(255,255,255,0.4); } }
+    html, body {
+      overflow: hidden;
+    }
+    body {
+      background-color: #ffffff;
+      color: #003366;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #00549f;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      animation: pulse 1.5s infinite;
+    }
+    header p {
+      margin: 5px 0 0;
+      font-size: 1rem;
+      font-weight: normal;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .container {
+      flex: 1;
+      width: 90%;
+      max-width: 700px;
+      margin: 40px auto;
+      background-color: #f2f2f2;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      text-align: center;
+      border-top: 8px solid #00549f;
+    }
+    .question {
+      background-color: #e6e6e6;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      min-height: 100px;
+    }
+    .chat-bubble {
+      background-color: #dde6f2;
+      color: #002147;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border-left: 4px solid #00549f;
+      text-align: left;
+      opacity: 0;
+    }
+    .label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #00549f;
+      text-align: left;
+    }
+    button {
+      margin-top: 15px;
+      background-color: #00549f;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #003366;
+    }
+    footer {
+      background-color: #f2f2f2;
+      color: #777;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+    @keyframes smoke {
+      0% { opacity: 0.2; transform: translateY(0) scale(1); }
+      50% { opacity: 0.6; transform: translateY(-10px) scale(1.1); }
+      100% { opacity: 0; transform: translateY(-20px) scale(1.2); }
+    }
+    .coffee-smoke {
+      position: absolute;
+      width: 20px;
+      height: 40px;
+      background: radial-gradient(ellipse at center, rgba(200,200,200,0.4) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%;
+      animation: smoke 3s infinite ease-in-out;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px 2px rgba(255,255,255,0.3); }
+      50% { box-shadow: 0 0 20px 5px rgba(255,255,255,0.8); }
+      100% { box-shadow: 0 0 10px 2px rgba(255,255,255,0.3); }
+    }
+    @keyframes thunderFlash {
+      0%, 100% { background-color: transparent; }
+      50% { background-color: rgba(255,255,255,0.4); }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>🤖 AVAGPT 🤖</h1>
-    <p>Direkt aus dem göttlichen PKE-Olymp München herabgestiegen, um hilflose Mitarbeitende auf den Pfad der Tugend zu führen – und wird jeden sündigen Zuspätkommer richten und ihn auf Ewigkeiten zu Bereitschaftseinsätzen bei <span style="color: red; font-weight: bold; animation: blink 1s infinite;">🔥 MTU 🔥</span> verdammen.</p>
+    <h1 style="font-size: 2.5rem;">🤖 AVAGPT 🤖</h1>
+    <p>Direkt aus dem göttlichen PKE-Olymp München herabgestiegen, um hilflose Mitarbeitende auf den Pfad der Tugend zu führen – und wird jeden sündigen Zuspätkommer richten und ihn auf Ewigkeiten zu Bereitschaftseinsätzen bei <span style='color: red; font-weight: bold; animation: blink 1s infinite;'>🔥 MTU 🔥</span> verdammen.</p>
   </header>
-  <div class="container">
+  <div class="container" style="position: relative;">
+    <div style="position: absolute; top: -40px; left: 20px; display: flex; align-items: center;">
+      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="AVAGPT Avatar" width="60" height="60" style="border-radius: 50%; box-shadow: 0 0 8px rgba(0,0,0,0.2); animation: glow 2s infinite;" />
+    </div>
     <div class="coffee-smoke"></div>
     <div class="question">
       <div class="label">Du:</div>
       <div id="typed-text"></div>
     </div>
     <button onclick="showAnswer()">Antworten anzeigen</button>
-    <div class="chat-container answers" id="answer" style="display:none;"></div>
+    <div class="answers" id="answer" style="display:none;">
+      <div class="label">AVAGPT sagt:</div>
+      <div class="chat-bubble" data-text="1. Steh früher auf, du fauler Hund! ☕"></div>
+      <div class="chat-bubble" data-text="2. Trödel nicht im Bad!"></div>
+      <div class="chat-bubble" data-text="3. Leg das Handy weg bei der morgendlichen Sitzung!"></div>
+      <div class="chat-bubble" data-text="4. Quatsch nicht erst im Büro herum!"></div>
+      <div class="button-group" style="margin-top: 30px; display: none;">
+        <button onclick="blessUser(this)">🙏 Danke, AVAGPT!</button>
+        <button onclick="curseUser(this)" style="margin-left: 10px; background-color: darkred;">😬 Was mach ich, wenn ich schon zu spät bin?</button>
+      </div>
+    </div>
   </div>
   <footer>
     Powered by SPS | Designed for PKE Campus – AVASYS Basis Schulung 🛠️
   </footer>
+  <audio id="thunder-audio" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7dfb5ce2cf.mp3?filename=thunderclap-112071.mp3" preload="auto"></audio>
   <script>
-    const userText = "Wie krieg ich meinen Arsch pünktlich zur Schulung, drück mir vorher noch ’nen Kaffee in die Tasse – und erspar somit meinen Kollegen die Gruppentherapie in Geduld?";
-    const answers = [
-      "1. Steh früher auf, du fauler Hund! ☕",
-      "2. Trödel nicht im Bad!",
-      "3. Leg das Handy weg bei der morgendlichen Sitzung!",
-      "4. Quatsch nicht erst im Büro herum!"
-    ];
+    const text = "Wie krieg ich meinen Arsch pünktlich zur Schulung, drück mir vorher noch ’nen Kaffee in die Tasse – und erspar somit meinen Kollegen die Gruppentherapie in Geduld?";
     const typedText = document.getElementById("typed-text");
-    const answerContainer = document.getElementById("answer");
-
-    function typeText(target, text, callback) {
-  let i = 0;
-  const interval = setInterval(() => {
-    target.innerHTML += text.charAt(i);
-    i++;
-    if (i === 1) playSound('ping');
-    if (i >= text.length) {
-      clearInterval(interval);
-      if (callback) callback();
+    let index = 0;
+    function typeText() {
+      if (index < text.length) {
+        typedText.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeText, 35);
+      }
     }
-  }, 30);
-}
-      }, 30);
-    }
-
     function showAnswer() {
-      answerContainer.style.display = 'flex';
+      const bubbles = document.querySelectorAll('.chat-bubble');
+      const buttonGroup = document.querySelector('.button-group');
+      document.getElementById('answer').style.display = 'block';
       let delay = 0;
-      answers.forEach((msg, i) => {
+      bubbles.forEach((bubble, i) => {
+        const text = bubble.dataset.text;
         setTimeout(() => {
-          const bubble = document.createElement('div');
-          bubble.className = 'chat-bubble chat-left';
-          answerContainer.appendChild(bubble);
-          bubble.style.opacity = '1';
-          typeText(bubble, msg, () => {
-            if (i === answers.length - 1) showButtons();
-          });
+          typeBubbleText(bubble, text);
+          new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_4c9412a768.mp3?filename=message-notification-112611.mp3').play().catch(() => {});
+          if (i === bubbles.length - 1) {
+            setTimeout(() => {
+              buttonGroup.style.display = 'block';
+            }, 1000);
+          }
         }, delay);
-        delay += msg.length * 30 + 500;
+        delay += text.length * 30 + 300;
       });
     }
-
-    function showButtons() {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'chat-bubble chat-right';
-      wrapper.style.opacity = '1';
-      wrapper.innerHTML = `<button onclick="respond(this, 'bless')">🙏 Danke, AVAGPT!</button><button onclick="respond(this, 'curse')" style="margin-left: 10px; background-color: darkred;">😬 Was mach ich, wenn ich schon zu spät bin?</button>`;
-      answerContainer.appendChild(wrapper);
+    function typeBubbleText(bubble, text) {
+      bubble.style.opacity = '1';
+      bubble.innerHTML = '';
+      let i = 0;
+      const interval = setInterval(() => {
+        bubble.innerHTML += text.charAt(i);
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, 30);
     }
-
-    function respond(button, type) {
-      const userMsg = document.createElement('div');
-      userMsg.className = 'chat-bubble chat-right';
-      userMsg.style.opacity = '1';
-      userMsg.textContent = button.textContent;
-      const parent = button.parentElement;
-      parent.innerHTML = '';
-      parent.appendChild(userMsg);
-
-      const reply = document.createElement('div');
-      reply.className = 'chat-bubble chat-left';
-      reply.style.opacity = '1';
-      answerContainer.appendChild(reply);
-      const message = type === 'bless'
-        ? 'AVAGPT segnet dich, kleiner Schüler. Möge dein Kaffee nie kalt und dein Kalender nie leer sein ✨'
-        : 'Dann hast du verkackt! AVAGPT verflucht dich auf ewig zu Montagsdiensten in der MTU. 😈';
-      if (type === 'curse') {
-        document.querySelector('.container').style.animation = 'thunderFlash 0.4s ease';
-        setTimeout(() => document.querySelector('.container').style.animation = '', 400);
-      }
-      typeText(reply, message);
-  if (type === 'bless') playSound('choir');
-  if (type === 'curse') playSound('doom');
+    function blessUser(btn) {
+  const group = btn.parentElement;
+  group.querySelectorAll('button').forEach(b => { if (b !== btn) b.remove(); });
+  const responseBubble = document.createElement('div');
+  responseBubble.className = 'chat-bubble';
+  responseBubble.style.opacity = '1';
+  responseBubble.innerHTML = btn.textContent;
+  group.parentElement.appendChild(responseBubble);
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  group.parentElement.appendChild(bubble);
+  typeBubbleText(bubble, "AVAGPT segnet dich, kleiner Schüler. Möge dein Kaffee nie kalt und dein Kalender nie leer sein ✨");
+  new Audio('https://cdn.pixabay.com/download/audio/2021/09/16/audio_b6a2dcde1b.mp3?filename=heavenly-angelic-choir-10547.mp3').play().catch(() => {});
+});
     }
-
-    window.onload = () => {
-      typeText(typedText, userText);
+    function curseUser(btn) {
+  const group = btn.parentElement;
+  group.querySelectorAll('button').forEach(b => { if (b !== btn) b.remove(); });
+  const responseBubble = document.createElement('div');
+  responseBubble.className = 'chat-bubble';
+  responseBubble.style.opacity = '1';
+  responseBubble.innerHTML = btn.textContent;
+  group.parentElement.appendChild(responseBubble);
+  const container = document.querySelector('.container');
+  container.style.animation = 'thunderFlash 0.4s ease';
+  setTimeout(() => { container.style.animation = ''; }, 400);
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  group.parentElement.appendChild(bubble);
+  typeBubbleText(bubble, "Dann hast du verkackt! AVAGPT verflucht dich auf ewig zu Montagsdiensten in der MTU. 😈");
+  new Audio('https://cdn.pixabay.com/download/audio/2022/03/11/audio_5f2f2cefb2.mp3?filename=dark-horror-transition-110879.mp3').play().catch(() => {});
+}, 400);
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble';
+      document.getElementById('answer').appendChild(bubble);
+      typeBubbleText(bubble, "Dann hast du verkackt! AVAGPT verflucht dich auf ewig zu Montagsdiensten in der MTU. 😈");
+      new Audio('https://cdn.pixabay.com/download/audio/2022/03/11/audio_5f2f2cefb2.mp3?filename=dark-horror-transition-110879.mp3').play().catch(() => {});
     }
+    window.onload = function () {
+      document.getElementById("thunder-audio").play().catch(() => {});
+      typeText();
+    };
   </script>
-<audio id="ping" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4c9412a768.mp3"></audio>
-<audio id="choir" src="https://cdn.pixabay.com/download/audio/2021/09/16/audio_b6a2dcde1b.mp3"></audio>
-<audio id="thunder" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7dfb5ce2cf.mp3"></audio>
-<audio id="doom" src="https://cdn.pixabay.com/download/audio/2022/03/11/audio_5f2f2cefb2.mp3"></audio>
-
-<script>
-  function playSound(id) {
-    const audio = document.getElementById(id);
-    if (audio) audio.play().catch(() => {});
-  }
-</script>
 </body>
 </html>
