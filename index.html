@@ -131,7 +131,7 @@
 <body>
   <header>
     <h1 style="font-size: 2.5rem;">🤖 AVAGPT 🤖</h1>
-    <p>Direkt aus dem göttlichen PKE-Olymp zu München herabgestiegen, um hilflose Mitarbeitende auf den Pfad der Tugend zu führen – und wird jeden sündigen Zuspätkommer richten und ihn auf Ewigkeiten zu Bereitschaftseinsätzen bei <span style='color: red; font-weight: bold; animation: blink 1s infinite;'>🔥 MTU 🔥</span> verdammen.</p>
+    <p>Direkt aus dem göttlichen PKE-Olymp München herabgestiegen, um hilflose Mitarbeitende auf den Pfad der Tugend zu führen – und wird jeden sündigen Zuspätkommer richten und ihn auf Ewigkeiten zu Bereitschaftseinsätzen bei <span style='color: red; font-weight: bold; animation: blink 1s infinite;'>🔥 MTU 🔥</span> verdammen.</p>
   </header>
   <div class="container" style="position: relative;">
     <div style="position: absolute; top: -40px; left: 20px; display: flex; align-items: center;">
@@ -200,20 +200,37 @@
       }, 30);
     }
     function blessUser(btn) {
-      const group = btn.parentElement;
-      group.style.display = 'none';
-      const bubble = document.createElement('div');
-      bubble.className = 'chat-bubble';
-      document.getElementById('answer').appendChild(bubble);
-      typeBubbleText(bubble, "AVAGPT segnet dich, kleiner Schüler. Möge dein Kaffee nie kalt und dein Kalender nie leer sein ✨");
-      new Audio('https://cdn.pixabay.com/download/audio/2021/09/16/audio_b6a2dcde1b.mp3?filename=heavenly-angelic-choir-10547.mp3').play().catch(() => {});
+  const group = btn.parentElement;
+  group.querySelectorAll('button').forEach(b => { if (b !== btn) b.remove(); });
+  const responseBubble = document.createElement('div');
+  responseBubble.className = 'chat-bubble';
+  responseBubble.style.opacity = '1';
+  responseBubble.innerHTML = btn.textContent;
+  group.parentElement.appendChild(responseBubble);
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  group.parentElement.appendChild(bubble);
+  typeBubbleText(bubble, "AVAGPT segnet dich, kleiner Schüler. Möge dein Kaffee nie kalt und dein Kalender nie leer sein ✨");
+  new Audio('https://cdn.pixabay.com/download/audio/2021/09/16/audio_b6a2dcde1b.mp3?filename=heavenly-angelic-choir-10547.mp3').play().catch(() => {});
+});
     }
     function curseUser(btn) {
-      const group = btn.parentElement;
-      group.style.display = 'none';
-      const container = document.querySelector('.container');
-      container.style.animation = 'thunderFlash 0.4s ease';
-      setTimeout(() => { container.style.animation = ''; }, 400);
+  const group = btn.parentElement;
+  group.querySelectorAll('button').forEach(b => { if (b !== btn) b.remove(); });
+  const responseBubble = document.createElement('div');
+  responseBubble.className = 'chat-bubble';
+  responseBubble.style.opacity = '1';
+  responseBubble.innerHTML = btn.textContent;
+  group.parentElement.appendChild(responseBubble);
+  const container = document.querySelector('.container');
+  container.style.animation = 'thunderFlash 0.4s ease';
+  setTimeout(() => { container.style.animation = ''; }, 400);
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  group.parentElement.appendChild(bubble);
+  typeBubbleText(bubble, "Dann hast du verkackt! AVAGPT verflucht dich auf ewig zu Montagsdiensten in der MTU. 😈");
+  new Audio('https://cdn.pixabay.com/download/audio/2022/03/11/audio_5f2f2cefb2.mp3?filename=dark-horror-transition-110879.mp3').play().catch(() => {});
+}, 400);
       const bubble = document.createElement('div');
       bubble.className = 'chat-bubble';
       document.getElementById('answer').appendChild(bubble);
